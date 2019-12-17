@@ -31,35 +31,35 @@ sh ${ORACLE_HOME}/root.sh
 
 su - oracle -c 'sh /vagrant/scripts/oracle_create_database.sh'
 
-echo "******************************************************************************"
-echo "Run TDE configuration scripts." `date`
-echo "******************************************************************************"
-su - oracle -c 'sh /vagrant/scripts/oracle_configure_tde.sh'
+#echo "******************************************************************************"
+#echo "Run TDE configuration scripts." `date`
+#echo "******************************************************************************"
+#su - oracle -c 'sh /vagrant/scripts/oracle_configure_tde.sh'
 
-echo "******************************************************************************"
-echo "Run Database Vault configuration scripts." `date`
-echo "******************************************************************************"
-su - oracle -c 'sh /vagrant/scripts/oracle_configure_dv.sh'
+#echo "******************************************************************************"
+#echo "Run Database Vault configuration scripts." `date`
+#echo "******************************************************************************"
+#su - oracle -c 'sh /vagrant/scripts/oracle_configure_dv.sh'
 
-echo "******************************************************************************"
-echo "Run OPatch update script." `date`
-echo "******************************************************************************"
-su - oracle -c 'sh /vagrant/scripts/oracle_opatch_update.sh'
+#echo "******************************************************************************"
+#echo "Run OPatch update script." `date`
+#echo "******************************************************************************"
+#su - oracle -c 'sh /vagrant/scripts/oracle_opatch_update.sh'
 
-echo "******************************************************************************"
-echo "Run shutdown script." `date`
-echo "******************************************************************************"
-su - oracle -c 'sh /vagrant/scripts/oracle_shutdown.sh'
+#echo "******************************************************************************"
+#echo "Run shutdown script." `date`
+#echo "******************************************************************************"
+#su - oracle -c 'sh /vagrant/scripts/oracle_shutdown.sh'
 
 #echo "******************************************************************************"
 #echo "Run patch script." `date`
 #echo "******************************************************************************"
 #su - oracle -c 'sh /vagrant/scripts/oracle_patch_db.sh'
 
-echo "******************************************************************************"
-echo "Run startup script." `date`
-echo "******************************************************************************"
-su - oracle -c 'sh /vagrant/scripts/oracle_startup.sh'
+#echo "******************************************************************************"
+#echo "Run startup script." `date`
+#echo "******************************************************************************"
+#su - oracle -c 'sh /vagrant/scripts/oracle_startup.sh'
 
 
 

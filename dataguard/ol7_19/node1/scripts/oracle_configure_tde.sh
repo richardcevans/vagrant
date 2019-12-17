@@ -14,7 +14,7 @@ export TDE_WALLET_DIR=${ORACLE_BASE}/admin/${ORACLE_SID}/wallet
 export TDE_SEPS_DIR=${ORACLE_BASE}/admin/${ORACLE_SID}/wallet/tde_seps
 
 mkdir -p ${ORACLE_BASE}/admin/${ORACLE_SID}/wallet/tde_seps
-find ${ORACLE_BASE}/admin/${ORACLE_SID}
+#find ${ORACLE_BASE}/admin/${ORACLE_SID}/wallet
 
 # What are the minimum commands required to use the EXTERNAL STORE capability?
 
@@ -40,9 +40,8 @@ select con_id, wrl_parameter, status from v\$encryption_wallet where con_id = 1;
 ADMINISTER KEY MANAGEMENT ADD SECRET 'Oracle123' FOR CLIENT 'TDE_WALLET' TO LOCAL AUTO_LOGIN KEYSTORE '${TDE_SEPS_DIR}';
 
 select con_id, wrl_parameter, status from v\$encryption_wallet where con_id = 1;
-SHUTDOWN IMMEDIATE;
-
-STARTUP;
+--SHUTDOWN IMMEDIATE;
+--STARTUP;
 
 select con_id, wrl_parameter, status from v\$encryption_wallet where con_id = 1;
 ADMINISTER KEY MANAGEMENT SET KEYSTORE OPEN IDENTIFIED BY EXTERNAL STORE;
@@ -57,6 +56,13 @@ select con_id, wrl_parameter, status from v\$encryption_wallet where con_id = 1;
 connect / as syskm
 
 ALTER DATABASE DICTIONARY ENCRYPT CREDENTIALS;
+
+alter session set container=pdb1;
+ADMINISTER KEY MANAGEMENT SET KEYSTORE OPEN IDENTIFIED BY EXTERNAL STORE;
+ADMINISTER KEY MANAGEMENT SET KEY IDENTIFIED BY EXTERNAL STORE with backup;
+
+connect / as sysdba
+select con_id, wrl_parameter, status from v\$encryption_wallet order by con_id;
 
 EOF
 
