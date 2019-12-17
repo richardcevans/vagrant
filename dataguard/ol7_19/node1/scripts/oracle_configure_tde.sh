@@ -25,7 +25,7 @@ set pages 9999
 column wrl_parameter format a55
 column status format a25
 
-select con_id, wrl_parameter, status from v\$encryption_wallet where con_id = 1;
+select con_id, wrl_parameter, status from v\$encryption_wallet order by con_id;
 
 ALTER SYSTEM SET WALLET_ROOT='${TDE_WALLET_DIR}' scope=spfile;
 SHUTDOWN IMMEDIATE;
@@ -35,28 +35,29 @@ ALTER SYSTEM SET TDE_CONFIGURATION="KEYSTORE_CONFIGURATION=FILE" scope=both;
 
 ADMINISTER KEY MANAGEMENT CREATE KEYSTORE IDENTIFIED BY Oracle123;
 
-select con_id, wrl_parameter, status from v\$encryption_wallet where con_id = 1;
+select con_id, wrl_parameter, status from v\$encryption_wallet order by con_id;
 
 ADMINISTER KEY MANAGEMENT ADD SECRET 'Oracle123' FOR CLIENT 'TDE_WALLET' TO LOCAL AUTO_LOGIN KEYSTORE '${TDE_SEPS_DIR}';
 
-select con_id, wrl_parameter, status from v\$encryption_wallet where con_id = 1;
+select con_id, wrl_parameter, status from v\$encryption_wallet order by con_id;
 --SHUTDOWN IMMEDIATE;
 --STARTUP;
 
-select con_id, wrl_parameter, status from v\$encryption_wallet where con_id = 1;
+select con_id, wrl_parameter, status from v\$encryption_wallet order by con_id;
 ADMINISTER KEY MANAGEMENT SET KEYSTORE OPEN IDENTIFIED BY EXTERNAL STORE;
-select con_id, wrl_parameter, status from v\$encryption_wallet where con_id = 1;
+select con_id, wrl_parameter, status from v\$encryption_wallet order by con_id;
 
 ADMINISTER KEY MANAGEMENT SET KEY IDENTIFIED BY EXTERNAL STORE with backup;
-select con_id, wrl_parameter, status from v\$encryption_wallet where con_id = 1;
+select con_id, wrl_parameter, status from v\$encryption_wallet order by con_id;
 
 ADMINISTER KEY MANAGEMENT CREATE AUTO_LOGIN KEYSTORE FROM KEYSTORE '${TDE_WALLET_DIR}' IDENTIFIED BY Oracle123;
 
-select con_id, wrl_parameter, status from v\$encryption_wallet where con_id = 1;
+select con_id, wrl_parameter, status from v\$encryption_wallet order by con_id;
 connect / as syskm
 
 ALTER DATABASE DICTIONARY ENCRYPT CREDENTIALS;
 
+connect / as sysdba
 alter session set container=pdb1;
 ADMINISTER KEY MANAGEMENT SET KEYSTORE OPEN IDENTIFIED BY EXTERNAL STORE;
 ADMINISTER KEY MANAGEMENT SET KEY IDENTIFIED BY EXTERNAL STORE with backup;
