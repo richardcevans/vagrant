@@ -128,6 +128,9 @@ ENABLE CONFIGURATION;
 SHOW CONFIGURATION;
 SHOW DATABASE ${NODE1_DB_UNIQUE_NAME};
 SHOW DATABASE ${NODE2_DB_UNIQUE_NAME};
-
+validate database verbose '${NODE1_DB_UNIQUE_NAME}';
+validate database verbose '${NODE2_DB_UNIQUE_NAME}';
+validate network configuration for all;
+validate database '${NODE2_DB_UNIQUE_NAME}' spfile;
 EXIT;
 EOF
